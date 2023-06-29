@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo de tabla con Bootstrap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Tabla de Estudiantes</h2>
+        <form action="{{ url_for('agregarAsistencias')}}" method="POST">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Fecha</th>
+                <th>Clase</th>
+                <th>Curso</th>
+                <th>Asistió</th>
+                <th>Justificación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <input type="hidden" name="fecha" value={{fecha}}>
+              {% for estudiante in estudiantes %}
+              <input type="hidden" name="estudiante_{{estudiante.id}}" value={{estudiante.id}}>
+              <tr>
+                <td>{{ estudiante.id }}</td>
+                <td>{{ estudiante.nombre }}</td>
+                <td>{{ estudiante.apellido }}</td>
+                <td>{{ estudiante.dni }}</td>
+                <td>{{ fecha }}</td>
+                {% if clase == 'aula' %}
+                  <td>Aula</td>
+                  <input type="hidden" name="clase" value="1">
+                {% elif clase == 'educacion fisica' %}
+                  <td>Educación Física</td>
+                  <input type="hidden" name="clase" value="2">
+                {% endif %}
+                <td>{{ estudiante.curso.anio }}° Año - {{ estudiante.curso.division }}° División</td>
+                <td>
+                  <select class="asistio_{{ estudiante.id }}" name="asistio_{{ estudiante.id }}">
+                    <option value="s">Sí</option>
+                    <option value="n">No</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" name="justificacion_{{ estudiante.id }}" class="form-control" placeholder="Justificación de la falta">
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-primary">Enviar Registro</button>
+        </form>
+
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
