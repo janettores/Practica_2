@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Formulario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="{{ url_for('static', filename='css/estilos.css') }}" rel="stylesheet" type="text/css" >
+</head>
+<body>
+    <section>
+        <nav class="navbar bg-info" style="height: 7em;">
+            <form class="container justify-content-start" style="height: 1em; margin-top: 0 auto !important; padding: 5px;">
+                <button class="btn btn-outline-success me-2 col-2 volver" type="button" style="background-color: black;">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('inicio') }}">Volver</a>
+                </button>
+                <input class="form-control-buscar m-3 col-4" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success col-3" type="submit">Buscar</button>
+            </form>
+        </nav>
+    </section>
+    <div class="container">
+        <h2>Formulario de inicio de sesión</h2>
+          <form method="POST" action="{{ url_for('ingresar') }}">
+            <div class="form-group">
+              <label for="email">Correo electrónico:</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su correo electrónico">
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña">
+            </div>
+
+            <div class="form-group">
+                <label for="curso">Rol:</label>
+                <select class="form-control" id="rol" name="rol">
+                    <option value="padre">Padre</option>
+                    <option value="preceptor">Preceptor</option>
+
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+          </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

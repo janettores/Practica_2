@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Informe Detalles</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Formulario</h2>
+            {% if informar is defined  %}
+               <table class="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Asistencia Aula Presente</th>
+                  <th>Asistencia Educación Física Presente</th>
+                  <th>Inasistencias Aula Ausente Justificadas</th>
+                  <th>Inasistencias Aula Ausente Injustificadas</th>
+                  <th>Inasistencias Educación Física Ausente Justificadas</th>
+                  <th>Inasistencias Educación Física Ausente Injustificadas</th>
+                  <th>Total Inasistencias</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in range(estudiantes|length) %}
+                <tr>
+                  <td>{{ estudiantes[i].nombre }}</td>
+                  <td>{{ estudiantes[i].apellido }}</td>
+                  <td>{{ cantidades[i][0] }}</td>
+                  <td>{{ cantidades[i][1] }}</td>
+                  <td>{{ cantidades[i][2] }}</td>
+                  <td>{{ cantidades[i][3] }}</td>
+                  <td>{{ cantidades[i][4] }}</td>
+                  <td>{{ cantidades[i][5] }}</td>
+                  <td>{{ cantidades[i][6] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+        {% endif %}
+        <form method="POST" action="{{ url_for('informeDetalles') }}">
+
+            <div class="form-group">
+                <label for="curso">curso:</label>
+                <select class="form-control" id="curso" name="curso">
+                   {% for curso in cursos %}
+                     <option value={{curso.id}}>{{curso.anio}}° Año - {{curso.division}}° División </option>
+                  {% endfor %}
+
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
